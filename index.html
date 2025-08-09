@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D CV - Md Abdur Rahman Jamil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            perspective: 1000px;
+        }
+
+        .cv-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            box-shadow: 
+                20px 20px 60px rgba(0,0,0,0.3),
+                -20px -20px 60px rgba(255,255,255,0.1),
+                inset 2px 2px 4px rgba(255,255,255,0.9),
+                inset -2px -2px 4px rgba(0,0,0,0.1);
+            transform: rotateX(5deg) rotateY(-2deg);
+            transition: all 0.3s ease;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cv-container:hover {
+            transform: rotateX(0deg) rotateY(0deg) scale(1.02);
+            box-shadow: 
+                30px 30px 80px rgba(0,0,0,0.4),
+                -30px -30px 80px rgba(255,255,255,0.1),
+                inset 2px 2px 4px rgba(255,255,255,0.9),
+                inset -2px -2px 4px rgba(0,0,0,0.1);
+        }
+
+        .floating-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(145deg, #ffffff 0%, #f1f3f4 100%);
+            border-radius: 25px;
+            box-shadow: 
+                10px 10px 30px rgba(0,0,0,0.1),
+                -10px -10px 30px rgba(255,255,255,0.8),
+                inset 2px 2px 4px rgba(255,255,255,0.9),
+                inset -2px -2px 4px rgba(0,0,0,0.05);
+            transform: translateZ(20px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #5a6c7d;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 
+                2px 2px 8px rgba(0,0,0,0.1),
+                -2px -2px 8px rgba(255,255,255,0.8);
+        }
+
+        .symbol {
+            font-size: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                8px 8px 25px rgba(0,0,0,0.1),
+                -8px -8px 25px rgba(255,255,255,0.8),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+            transform: translateZ(10px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .section:hover {
+            transform: translateZ(15px) translateY(-5px);
+            box-shadow: 
+                12px 12px 35px rgba(0,0,0,0.15),
+                -12px -12px 35px rgba(255,255,255,0.9),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            box-shadow: 2px 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .personal-statement {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            text-align: justify;
+            padding: 20px;
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 15px;
+            box-shadow: 
+                inset 3px 3px 8px rgba(0,0,0,0.1),
+                inset -3px -3px 8px rgba(255,255,255,0.8);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid transparent;
+            border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+            box-shadow: 
+                6px 6px 15px rgba(0,0,0,0.1),
+                -6px -6px 15px rgba(255,255,255,0.8),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            transform: translateZ(5px);
+        }
+
+        .skill-category:hover {
+            transform: translateZ(10px) translateY(-3px);
+            box-shadow: 
+                8px 8px 20px rgba(0,0,0,0.15),
+                -8px -8px 20px rgba(255,255,255,0.9),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+        }
+
+        .skill-category-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-list {
+            color: #5a6c7d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 15px;
+            box-shadow: 
+                6px 6px 15px rgba(0,0,0,0.1),
+                -6px -6px 15px rgba(255,255,255,0.8),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            transform: translateZ(5px);
+        }
+
+        .experience-item:hover {
+            transform: translateZ(10px) translateY(-2px);
+            box-shadow: 
+                8px 8px 20px rgba(0,0,0,0.15),
+                -8px -8px 20px rgba(255,255,255,0.9),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .job-period {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 
+                3px 3px 10px rgba(102, 126, 234, 0.3),
+                inset 1px 1px 2px rgba(255,255,255,0.3);
+        }
+
+        .job-description {
+            color: #4a5568;
+            margin-top: 15px;
+        }
+
+        .bullet-point {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .bullet-point::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(102, 126, 234, 0.3);
+        }
+
+        .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            box-shadow: 
+                4px 4px 12px rgba(0,0,0,0.1),
+                -4px -4px 12px rgba(255,255,255,0.8),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+            transform: translateZ(3px);
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateZ(8px) translateY(-2px);
+        }
+
+        .education-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .education-details {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .education-modules {
+            color: #5a6c7d;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .additional-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .info-category {
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 
+                6px 6px 15px rgba(0,0,0,0.1),
+                -6px -6px 15px rgba(255,255,255,0.8),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+            transform: translateZ(5px);
+            transition: all 0.3s ease;
+        }
+
+        .info-category:hover {
+            transform: translateZ(10px) translateY(-3px);
+            box-shadow: 
+                8px 8px 20px rgba(0,0,0,0.15),
+                -8px -8px 20px rgba(255,255,255,0.9),
+                inset 1px 1px 2px rgba(255,255,255,0.9),
+                inset -1px -1px 2px rgba(0,0,0,0.05);
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-content {
+            color: #5a6c7d;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 8%;
+            animation-delay: 3s;
+        }
+
+        .shape-3 {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 
+                4px 4px 12px rgba(76, 175, 80, 0.3),
+                inset 1px 1px 2px rgba(255,255,255,0.3),
+                inset -1px -1px 2px rgba(0,0,0,0.2);
+            margin-left: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 15px;
+            box-shadow: 
+                inset 3px 3px 8px rgba(0,0,0,0.1),
+                inset -3px -3px 8px rgba(255,255,255,0.8);
+            color: #718096;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                perspective: none;
+            }
+
+            .cv-container {
+                transform: none;
+                border-radius: 15px;
+                padding: 25px;
+            }
+
+            .cv-container:hover {
+                transform: none;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .name {
+                font-size: 32px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                perspective: none;
+                padding: 0;
+            }
+            
+            .cv-container {
+                box-shadow: none;
+                transform: none;
+                border-radius: 0;
+                padding: 25mm;
+            }
+
+            .section {
+                box-shadow: none;
+                background: white;
+                transform: none;
+                border: 1px solid #e2e8f0;
+            }
+
+            .header {
+                box-shadow: none;
+                background: white;
+                border: 1px solid #e2e8f0;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="floating-elements">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="floating-bg"></div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <h1 class="name">Md Abdur Rahman Jamil</h1>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="symbol">📍</span>
+                    <span>Room 4, Flat V, The Hosiery Factory, LE1 5TH, Leicester, United Kingdom</span>
+                </div>
+                <div class="contact-item">
+                    <span class="symbol">📱</span>
+                    <span>07493 598750</span>
+                </div>
+                <div class="contact-item">
+                    <span class="symbol">✉️</span>
+                    <span>jamilmdabdurrahman@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="symbol">💼</span>
+                    <span>arjamil@deshifashion.co.uk</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Statement -->
+        <div class="section">
+            <h2 class="section-title">Personal Statement</h2>
+            <p class="personal-statement">
+                Proactive and adaptable business and marketing professional with extensive experience in digital marketing, hospitality management, social media management, ecommerce, and team leadership. Currently completing a BA (Hons) in Business and Management at De Montfort University whilst working as Digital Marketing Coordinator for Deshi Fashion Ltd. Proven track record in brand development, multi-channel marketing strategies, and scaling start-ups through strategic content marketing, social media management, and innovative branding solutions.
+            </p>
+        </div>
+
+        <!-- Key Skills -->
+        <div class="section">
+            <h2 class="section-title">Key Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-title">Digital Marketing & Advertising</div>
+                    <div class="skill-list">Meta & Amazon Ads, PPC campaign management, Content strategy, Analytics, Planning & organising</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Ecommerce & Amazon FBA</div>
+                    <div class="skill-list">Seller account management, Listing optimisation, Multi-channel retail strategy</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Brand Development</div>
+                    <div class="skill-list">Logo design, Brand guidelines, Digital content creation, Copywriting</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Social Media Management</div>
+                    <div class="skill-list">Instagram, Facebook, TikTok strategy, Content creation using Canva and Adobe Creative Suite</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Market Research</div>
+                    <div class="skill-list">Trend analysis, Niche identification, Audience insights and segmentation</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Team Leadership</div>
+                    <div class="skill-list">Project planning, Operations management, Strategic organising, Staff coordination, Process optimisation, Resource allocation</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Content Creation</div>
+                    <div class="skill-list">Product photography, Videography, Short-form video production and editing</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Technical Proficiency</div>
+                    <div class="skill-list">Meta Ads Manager, Meta Business Suite, Canva, Google Analytics, Helium 10, Shopify, Amazon Seller Central, Microsoft Office Suite, TikTok Ads Manager, ChatGPT, Google Gemini Pro</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Digital Marketing & Social Media Coordinator (Placement)</div>
+                        <div class="company">Deshi Fashion Ltd, Leicester</div>
+                    </div>
+                    <div class="job-period">October 2024 – Present</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Lead development and execution of social media content strategies and digital advertising campaigns</div>
+                    <div class="bullet-point">Design compelling visual assets using Canva and Adobe Creative Suite</div>
+                    <div class="bullet-point">Conduct comprehensive audience analysis and product research to inform targeted advertising campaigns</div>
+                    <div class="bullet-point">Achieved 35% increase in online engagement within three months through strategic content creation and Instagram Reels</div>
+                    <div class="bullet-point">Manage multi-platform content across Instagram, Facebook, and company website ensuring brand consistency</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Assistant Manager</div>
+                        <div class="company">Bombay Bites Restaurant, Leicester</div>
+                    </div>
+                    <div class="job-period">September 2022 – Present</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Supervise daily restaurant operations and coordinate staff activities across all service areas</div>
+                    <div class="bullet-point">Implement service improvements resulting in enhanced customer satisfaction ratings</div>
+                    <div class="bullet-point">Support marketing initiatives including promotional campaigns and digital content development</div>
+                    <div class="bullet-point">Manage inventory control and maintain strategic supplier relationships</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Voluntary Ecommerce & Amazon FBA Consultant</div>
+                        <div class="company">Gilldon Ltd / WearBloom.co.uk, Leicester</div>
+                    </div>
+                    <div class="job-period">May 2024 – Present</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Develop comprehensive ecommerce website foundation and complete brand identity for WearBloom (pre-launch phase)</div>
+                    <div class="bullet-point">Prepare detailed Amazon FBA setup procedures, product listing optimisation strategies, and PPC campaign frameworks</div>
+                    <div class="bullet-point">Create complete branding package and integrated multi-channel marketing strategy</div>
+                    <div class="bullet-point">Design operational business plans including inventory management and order fulfillment systems</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Head of Business</div>
+                        <div class="company">Mom'z Kitchen, Noakhali, Bangladesh</div>
+                    </div>
+                    <div class="job-period">August 2017 – Present</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Founded and successfully scaled online food business, managing team of 8+ staff members</div>
+                    <div class="bullet-point">Led comprehensive marketing campaigns whilst ensuring full compliance with health and safety standards</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Digital Marketing Manager</div>
+                        <div class="company">Dress Collection, Dhaka, Bangladesh</div>
+                    </div>
+                    <div class="job-period">September 2018 – 2021</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Executed integrated SEO and PPC campaigns resulting in significant traffic growth and sales conversion</div>
+                    <div class="bullet-point">Managed comprehensive social media strategy, seasonal promotional campaigns, and product launch initiatives</div>
+                    <div class="bullet-point">Conducted competitive market analysis and optimised user experience design for enhanced conversion rates</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Sortation Associate</div>
+                        <div class="company">Amazon Fulfillment Centre, Coalville</div>
+                    </div>
+                    <div class="job-period">September 2024 – January 2025</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Maintained high productivity standards whilst ensuring accurate package sorting for timely customer delivery</div>
+                    <div class="bullet-point">Collaborated effectively within fast-paced team environment to consistently meet daily operational targets</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Warehouse Operative</div>
+                        <div class="company">DPD Hub 4 & 5</div>
+                    </div>
+                    <div class="job-period">July 2024 – October 2024</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Processed high-volume parcel operations with exceptional accuracy in sorting and distribution</div>
+                    <div class="bullet-point">Maintained strict adherence to health and safety protocols ensuring secure working environment</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Care Assistant</div>
+                        <div class="company">Carer Connect, Leicester</div>
+                    </div>
+                    <div class="job-period">January 2023</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Provided compassionate care and comprehensive support services to vulnerable individuals</div>
+                    <div class="bullet-point">Maintained accurate health records and collaborated effectively with multidisciplinary medical teams</div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Event Catering Staff</div>
+                        <div class="company">Bismillah Foods, Various UK Cities</div>
+                    </div>
+                    <div class="job-period">Various periods</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Supported large-scale catering operations across multiple high-profile events in Southampton, Middlesbrough, Newcastle</div>
+                    <div class="bullet-point">Gained valuable experience in event management, high-pressure environments, customer service excellence, and collaborative teamwork</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="education-item">
+                <div class="education-title">BA (Hons) Business and Management</div>
+                <div class="education-details">De Montfort University, Leicester | Expected 2025</div>
+                <div class="education-modules">Key modules: Global Operations Management, Financial Reporting, Sustainable Business Practices, Business Research Methods</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-title">Bachelor of Tourism & Hospitality Management</div>
+                <div class="education-details">World University of Bangladesh | 2019-2021 (Incomplete)</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-title">Higher Secondary Certificate - Business Studies</div>
+                <div class="education-details">BAF Shaheen College, Dhaka | 2018</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-title">Secondary School Certificate - Business Studies</div>
+                <div class="education-details">Noakhali Zilla School | 2015</div>
+            </div>
+        </div>
+
+        <!-- Voluntary Work -->
+        <div class="section">
+            <h2 class="section-title">Voluntary Work</h2>
+            
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Google Maps Local Guide<span class="level-badge">Level 6</span></div>
+                        <div class="company">Google Maps Community</div>
+                    </div>
+                    <div class="job-period">2022 – Present</div>
+                </div>
+                <div class="job-description">
+                    <div class="bullet-point">Contributed photos, ratings, and comprehensive reviews generating over 200,000 views, significantly enhancing business visibility</div>
+                    <div class="bullet-point">Actively promoted restaurants, event venues, religious sites, and national parks throughout the UK</div>
+                    <div class="bullet-point">Focused on community support initiatives, digital storytelling, and providing accurate location-based information</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="section">
+            <h2 class="section-title">Additional Information</h2>
+            <div class="additional-info">
+                <div class="info-category">
+                    <div class="info-title">Languages</div>
+                    <div class="info-content">English (Fluent), Bengali (Native), Hindi & Urdu (Conversational)</div>
+                </div>
+                <div class="info-category">
+                    <div class="info-title">Technical Skills</div>
+                    <div class="info-content">Shopify, Amazon Seller Central, Adobe Photoshop, Meta Advertising Platforms, CapCut, Kinemaster Pro</div>
+                </div>
+                <div class="info-category">
+                    <div class="info-title">Core Competencies</div>
+                    <div class="info-content">Strategic problem-solving, Adaptability, Team leadership, Effective communication, Customer service excellence, Efficient multitasking</div>
+                </div>
+                <div class="info-category">
+                    <div class="info-title">Interests</div>
+                    <div class="info-content">International travel and cultural exploration, Content creation through photography and videography, Mentoring small businesses in digital growth, Cycling, Swimming, Karting</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            References available upon request
+        </div>
+    </div>
+</body>
+</html>
