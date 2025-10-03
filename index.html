@@ -187,6 +187,60 @@
             transform: translateY(-3px);
         }
         
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+        
+        .category-title {
+            font-size: 1.2em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-skills {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .skill-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: #495057;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateX(5px);
+            border-left-color: white;
+        }
+        
         @media (max-width: 768px) {
             body {
                 padding: 20px 10px;
@@ -380,19 +434,55 @@
             
             <div class="section">
                 <h2 class="section-title">Key Skills</h2>
-                <div class="skills-container">
-                    <div class="skill-tag">Digital Marketing</div>
-                    <div class="skill-tag">Social Media Management</div>
-                    <div class="skill-tag">Brand Development</div>
-                    <div class="skill-tag">E-commerce Strategy</div>
-                    <div class="skill-tag">Content Marketing</div>
-                    <div class="skill-tag">SEO & Analytics</div>
-                    <div class="skill-tag">Team Leadership</div>
-                    <div class="skill-tag">Student Marketing</div>
-                    <div class="skill-tag">Event Planning</div>
-                    <div class="skill-tag">Business Development</div>
-                    <div class="skill-tag">Customer Relations</div>
-                    <div class="skill-tag">Strategic Planning</div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="category-title">🎯 Marketing & Brand</h3>
+                        <div class="category-skills">
+                            <div class="skill-item">Digital Marketing</div>
+                            <div class="skill-item">Social Media Management</div>
+                            <div class="skill-item">Brand Development</div>
+                            <div class="skill-item">Content Marketing</div>
+                            <div class="skill-item">SEO & Analytics</div>
+                            <div class="skill-item">Student Marketing</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3 class="category-title">💼 Business & Management</h3>
+                        <div class="category-skills">
+                            <div class="skill-item">Team Leadership</div>
+                            <div class="skill-item">Strategic Planning</div>
+                            <div class="skill-item">Business Development</div>
+                            <div class="skill-item">Operations Management</div>
+                            <div class="skill-item">Project Management</div>
+                            <div class="skill-item">Problem Solving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3 class="category-title">🛍️ E-commerce & Sales</h3>
+                        <div class="category-skills">
+                            <div class="skill-item">E-commerce Strategy</div>
+                            <div class="skill-item">Customer Relations</div>
+                            <div class="skill-item">POS Systems</div>
+                            <div class="skill-item">Cash Handling</div>
+                            <div class="skill-item">Inventory Control</div>
+                            <div class="skill-item">Purchase Orders</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3 class="category-title">🎪 Events & Hospitality</h3>
+                        <div class="category-skills">
+                            <div class="skill-item">Event Planning</div>
+                            <div class="skill-item">Hospitality Management</div>
+                            <div class="skill-item">Customer Service</div>
+                            <div class="skill-item">Culinary Arts</div>
+                            <div class="skill-item">Restaurant Operations</div>
+                            <div class="skill-item">Staff Training</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
